@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# DRXHUB_CCCFG is set by extend/ENV/super.rb
+# DRXHUB_LIBRARY is set by bin/dhub
+# shellcheck disable=SC2154,SC2250
+pathremove() {
+  local IFS=':'
+  local NEWPATH=""
+  local DIR=""
+  local PATHVARIABLE="${2:-PATH}"
+
+  for DIR in ${!PATHVARIABLE}
+  do
+    if [[ "${DIR}" != "$1" ]]
+    then
+      NEWPATH="${NEWPATH:+$NEWPATH:}${DIR}"
+    fi
+  done
+  export "${PATHVARIABLE}"="${NEWPATH}"
+}
+
+SAVED_PATH="${PATH}"
+pathremove "${DRXHUB_LIBRARY}/DinrusHub/shims/linux/super"
+MAKE="$(command -v make)"
+export MAKE
+export PATH="${SAVED_PATH}"
+
+export DRXHUB_CCCFG="O${DRXHUB_CCCFG}"
+
+exec "${MAKE}" "$@"

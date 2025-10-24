@@ -1,0 +1,71 @@
+#!/bin/bash -p
+
+# This script because we support $DRXHUB_GIT, $DRXHUB_SVN, etc., Xcode-only and
+# no Xcode/CLT configurations. Order is careful to be what the user would want.
+
+# DRXHUB_LIBRARY is set by bin/dhub
+# SHIM_FILE is set by shims/utils.sh
+# DRXHUB_GIT is set by brew.sh
+# DRXHUB_SVN is from the user environment.
+# DRXHUB_PREFIX is set by extend/ENV/super.rb
+# shellcheck disable=SC2154
+if [[ -z "${DRXHUB_LIBRARY}" ]]
+then
+  echo "${0##*/}: This shim is internal and must be run via dhub." >&2
+  exit 1
+fi
+
+source "${DRXHUB_LIBRARY}/DinrusHub/shims/utils.sh"
+
+# shellcheck disable=SC2249
+case "$(lowercase "${SHIM_FILE}")" in
+  git)
+    if [[ -n "${DRXHUB_GIT}" && "${DRXHUB_GIT}" != git ]]
+    then
+      safe_exec "$(type -P "${DRXHUB_GIT}")" "$@"
+    fi
+    ;;
+  svn)
+    if [[ -n "${DRXHUB_SVN}" && "${DRXHUB_SVN}" != svn ]]
+    then
+      safe_exec "$(type -P "${DRXHUB_SVN}")" "$@"
+    fi
+    ;;
+esac
+
+brew_prefix_version="${DRXHUB_PREFIX}/bin/${SHIM_FILE}"
+safe_exec "${brew_prefix_version}" "$@"
+
+try_exec_non_system "${SHIM_FILE}" "$@"
+
+if executable "/usr/bin/xcode-select"
+then
+  # xcode-select will return empty on no Xcode/CLT configuration.
+  #   /usr/bin/<tool> will be a popup stub under such configuration.
+  # xcrun hangs if xcode-select is set to "/"
+  xcode_path="$(/usr/bin/xcode-select -print-path 2>/dev/null)"
+  if [[ -z "${xcode_path}" ]]
+  then
+    if [[ "${DRXHUB_MACOS_VERSION_NUMERIC}" -ge "100900" ]]
+    then
+      popup_stub=1
+    fi
+  fi
+  if [[ -z "${popup_stub}" && "${xcode_path}" != "/" ]]
+  then
+    path="$(/usr/bin/xcrun -find "${SHIM_FILE}" 2>/dev/null)"
+    safe_exec "${path}" "$@"
+  fi
+fi
+
+path="/Applications/Xcode.app/Contents/Developer/usr/bin/${SHIM_FILE}"
+safe_exec "${path}" "$@"
+
+if [[ -z "${popup_stub}" && "${DRXHUB_MACOS_VERSION_NUMERIC}" -lt "101500" ]]
+then
+  path="/usr/bin/${SHIM_FILE}"
+  safe_exec "${path}" "$@"
+fi
+
+echo "You must: dhub install ${SHIM_FILE}" >&2
+exit 1

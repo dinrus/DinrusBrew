@@ -1,6 +1,6 @@
 ---
 require:
-  - ./DinrusBrew/rubocops.rb
+  - ./DinrusHub/rubocops.rb
   - rubocop-md
   - rubocop-performance
   - rubocop-rspec
@@ -17,9 +17,9 @@ AllCops:
   Include:
     - "**/*.rbi"
   Exclude:
-    - "DinrusBrew/sorbet/rbi/{dsl,gems}/**/*.rbi"
-    - "DinrusBrew/bin/*"
-    - "DinrusBrew/vendor/**/*"
+    - "DinrusHub/sorbet/rbi/{dsl,gems}/**/*.rbi"
+    - "DinrusHub/bin/*"
+    - "DinrusHub/vendor/**/*"
     - "Taps/*/*/vendor/**/*"
   SuggestExtensions:
     rubocop-minitest: false
@@ -46,34 +46,34 @@ FormulaAudit:
 FormulaAuditStrict:
   Enabled: true
 
-DinrusBrew:
+DinrusHub:
   Enabled: true
 
-DinrusBrew/Blank:
+DinrusHub/Blank:
   Exclude:
     # Core extensions are not available here:
-    - "DinrusBrew/startup/bootsnap.rb"
+    - "DinrusHub/startup/bootsnap.rb"
 
-DinrusBrew/CompactBlank:
+DinrusHub/CompactBlank:
   Exclude:
     # `blank?` is not necessarily available here:
-    - "DinrusBrew/extend/enumerable.rb"
+    - "DinrusHub/extend/enumerable.rb"
 
-DinrusBrew/NoFileutilsRmrf:
+DinrusHub/NoFileutilsRmrf:
   Include:
     - "/**/{Formula,Casks}/**/*.rb"
     - "**/{Formula,Casks}/**/*.rb"
 
 # only used internally
-DinrusBrew/MoveToExtendOS:
+DinrusHub/MoveToExtendOS:
   Enabled: false
 
-DinrusBrew/NegateInclude:
+DinrusHub/NegateInclude:
   Exclude:
     # `exclude?` is not available here:
-    - "DinrusBrew/standalone/init.rb"
-    - "DinrusBrew/rubocops/**/*"
-    - "DinrusBrew/sorbet/tapioca/**/*"
+    - "DinrusHub/standalone/init.rb"
+    - "DinrusHub/rubocops/**/*"
+    - "DinrusHub/sorbet/tapioca/**/*"
 
 # `system` is a special case and aligns on second argument, so allow this for formulae.
 Layout/ArgumentAlignment:
@@ -225,7 +225,7 @@ Performance/MethodObjectAsBlock:
 
 RSpec:
   Include:
-    - "DinrusBrew/test/**/*"
+    - "DinrusHub/test/**/*"
 
 # Intentionally disabled as it doesn't fit with our code style.
 RSpec/AnyInstance:
@@ -284,9 +284,9 @@ Sorbet/StrictSigil:
     - "Taps/**/*"
     - "/**/{Formula,Casks}/**/*.rb"
     - "**/{Formula,Casks}/**/*.rb"
-    - "DinrusBrew/utils/ruby_check_version_script.rb" # A standalone script.
-    - "DinrusBrew/{standalone,startup}/*.rb" # These are loaded before sorbet-runtime
-    - "DinrusBrew/test/**/*.rb"
+    - "DinrusHub/utils/ruby_check_version_script.rb" # A standalone script.
+    - "DinrusHub/{standalone,startup}/*.rb" # These are loaded before sorbet-runtime
+    - "DinrusHub/test/**/*.rb"
 
 Sorbet/TrueSigil:
   Enabled: true
@@ -294,7 +294,7 @@ Sorbet/TrueSigil:
     - "Taps/**/*"
     - "/**/{Formula,Casks}/**/*.rb"
     - "**/{Formula,Casks}/**/*.rb"
-    - "DinrusBrew/test/**/*.rb"
+    - "DinrusHub/test/**/*.rb"
 
 # Require &&/|| instead of and/or
 Style/AndOr:
@@ -332,7 +332,7 @@ Style/DisableCopsWithinSourceCodeDirective:
     - "/**/{Formula,Casks}/**/*.rb"
     - "**/{Formula,Casks}/**/*.rb"
 
-# The files actually scanned in this cop are in `Library/DinrusBrew/.rubocop.yml`.
+# The files actually scanned in this cop are in `Library/DinrusHub/.rubocop.yml`.
 Style/Documentation:
   Exclude:
     - "Taps/**/*"
@@ -360,7 +360,7 @@ Style/FrozenStringLiteralComment:
     - "Taps/*/*/*.rb"
     - "/**/{Formula,Casks}/**/*.rb"
     - "**/{Formula,Casks}/**/*.rb"
-    - "DinrusBrew/test/**/Casks/**/*.rb"
+    - "DinrusHub/test/**/Casks/**/*.rb"
     - "**/*.rbi"
     - "**/Brewfile"
 
@@ -418,7 +418,7 @@ Style/OptionalBooleanParameter:
     - respond_to_missing?
 
 # Broken in RuboCop 1.68.0 so tries to fix line continuations in inline patch blocks:
-# https://github.com/DinrusBrew/brew/actions/runs/11653110391/job/32460881827?pr=18682
+# https://github.com/Homebrew/brew/actions/runs/11653110391/job/32460881827?pr=18682
 Style/RedundantLineContinuation:
   Enabled: false
 

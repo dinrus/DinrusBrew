@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export DRXHUB_RDBG="1"
+
+DRXHUB_PORTABLE_RUBY_BIN="$(cd "$(dirname "$0")"/../../ && pwd)/vendor/portable-ruby/current/bin/"
+exec "${DRXHUB_PORTABLE_RUBY_BIN}"rdbg "$@"

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# DRXHUB_CCCFG and DRXHUB_SDKROOT are set by extend/ENV/super.rb
+# shellcheck disable=SC2154
+if [[ "${DRXHUB_CCCFG}" = *a* ]]
+then
+  case "$1" in
+    --cc) echo "cc" ;;
+    --cpp) echo "cpp" ;;
+    --includedir) echo "${DRXHUB_SDKROOT}/usr/include/apr-1" ;;
+    --includes) echo "-isystem${DRXHUB_SDKROOT}/usr/include/apr-1" ;;
+    --apr-libtool) echo "glibtool" ;;
+    *)
+      exec xcrun apr-1-config "$@"
+      ;;
+  esac
+else
+  exec /usr/bin/apr-1-config "$@"
+fi

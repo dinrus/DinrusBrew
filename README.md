@@ -1,12 +1,12 @@
-# DinrusHub
+# DinrusBrew
 
 [![Релиз на GitHub](https://img.shields.io/github/release/Homebrew/brew.svg)](https://github.com/Homebrew/brew/releases)
 
-DinrusHub - это адаптированная версия Homebrew, которая переведена на русский язык и является вспомогательным средством для использования новых библиотек на операционной системе с установленным комплектом разработки drxtk от DinrusPro.
+DinrusBrew - это адаптированная версия Homebrew, которая переведена на русский язык и является вспомогательным средством для использования новых библиотек на операционной системе с установленным комплектом разработки drxtk от DinrusPro.
 
 Эта версия работает несколько иначе; она устанвливает пакеты в префикс DinrusPro/drxtk и, соответственно, использует уже установленные инструменты, т.е. компилятор drux, вместо тех, которые используются в Homebrew.
 
-При дальнейшей разработке DinrusHub нацелена на интеграцию (или замену) менеджера пакетов eopkg, который используется на ОС "Solux Linux 4.4. Harmony" -
+При дальнейшей разработке DinrusBrew нацелена на интеграцию (или замену) менеджера пакетов eopkg, который используется на ОС "Solux Linux 4.4. Harmony" -
 эта операционная система является основной, под которую ведутся разработки DinrusPro.
 
 Что касается дальнейшего текста, то он относится по большей части к Homebrew, который вы можете скачать прямо из его собственного репозитория (, если эта версия вам не подойдёт, т.к. вы не являетесь разработчиком DinrusPro).
@@ -58,7 +58,7 @@ Alternatively, for something more substantial, check out one of the issues label
 
 ## Безопасность
 
-Please report security issues by filling in [the security advisory form](https://github.com/dinrus/brew/security/advisories/new).
+Please report security issues by filling in [the security advisory form](https://github.com/Homebrew/brew/security/advisories/new).
 
 ## Кто Мы Такие в Homebrew?
 

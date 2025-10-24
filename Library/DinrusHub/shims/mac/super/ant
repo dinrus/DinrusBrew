@@ -1,0 +1,9 @@
+#!/bin/bash
+
+export DRXHUB_CCCFG="O${DRXHUB_CCCFG}"
+
+ant=/usr/bin/ant
+# DRXHUB_BREW_FILE is set by bin/dhub
+# shellcheck disable=SC2154
+[[ -x "${ant}" ]] || ant="$("${DRXHUB_BREW_FILE}" --prefix ant)/bin/ant"
+exec "${ant}" "$@"

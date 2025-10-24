@@ -1,7 +1,7 @@
-title: DinrusBrew Documentation
+title: DinrusHub Documentation
 description: Documentation for the missing package manager for macOS (or Linux).
 
-remote_theme: DinrusBrew/brew.sh
+remote_theme: DinrusHub/brew.sh
 
 exclude:
   - bin

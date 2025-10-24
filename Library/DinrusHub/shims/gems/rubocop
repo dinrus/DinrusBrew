@@ -1,0 +1,3 @@
+#!/bin/bash
+DRXHUB_PREFIX_BIN="$(cd "$(dirname "$0")"/../../../../ && pwd)/bin/"
+exec "${DRXHUB_PREFIX_BIN}"dhub rubocop "$@"

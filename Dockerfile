@@ -57,42 +57,42 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && sed -i -E 's/^(USERGROUPS_ENAB\s+)yes$/\1no/' /etc/login.defs \
   && localedef -i en_US -f UTF-8 en_US.UTF-8 \
-  && useradd -u "${USER_ID}" --create-home --shell /bin/bash --user-group linuxbrew \
-  && echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers \
-  && su - linuxbrew -c 'mkdir ~/.linuxbrew'
+  && useradd -u "${USER_ID}" --create-home --shell /bin/bash --user-group dinrusbrew \
+  && echo 'dinrusbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers \
+  && su - dinrusbrew -c 'mkdir ~/.drx'
 
 USER linuxbrew
-COPY --chown=linuxbrew:linuxbrew . /home/linuxbrew/.linuxbrew/DinrusBrew
-ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}" \
-  XDG_CACHE_HOME=/home/linuxbrew/.cache
+COPY --chown=linuxbrew:linuxbrew . /home/drx/.drx/DinrusHub
+ENV PATH="/home/drx/.drx/bin:/home/drx/.drx/sbin:${PATH}" \
+  XDG_CACHE_HOME=/home/drx/.cache
 WORKDIR /home/linuxbrew
 
 
 RUN --mount=type=cache,target=/tmp/homebrew-core,uid="${USER_ID}",sharing=locked \
     # Clone the homebre-core repo into /tmp/homebrew-core or pull latest changes if it exists
     git clone https://github.com/homebrew/homebrew-core /tmp/homebrew-core || { cd /tmp/homebrew-core && git pull; } \
-    && mkdir -p /home/linuxbrew/.linuxbrew/DinrusBrew/Library/Taps/homebrew/homebrew-core \
-    && cp -r /tmp/homebrew-core /home/linuxbrew/.linuxbrew/DinrusBrew/Library/Taps/homebrew/
+    && mkdir -p /home/drx/.drx/DinrusHub/Library/Taps/homebrew/homebrew-core \
+    && cp -r /tmp/homebrew-core /home/drx/.drx/DinrusHub/Library/Taps/homebrew/
 
 
-RUN --mount=type=cache,target=/home/linuxbrew/.cache,uid="${USER_ID}" \
-   --mount=type=cache,target=/home/linuxbrew/.bundle,uid="${USER_ID}" \
+RUN --mount=type=cache,target=/home/drx/.cache,uid="${USER_ID}" \
+   --mount=type=cache,target=/home/drx/.bundle,uid="${USER_ID}" \
    mkdir -p \
-  .linuxbrew/bin \
-  .linuxbrew/etc \
-  .linuxbrew/include \
-  .linuxbrew/lib \
-  .linuxbrew/opt \
-  .linuxbrew/sbin \
-  .linuxbrew/share \
-  .linuxbrew/var/homebrew/linked \
-  .linuxbrew/Cellar \
-  && ln -s ../DinrusBrew/bin/brew .linuxbrew/bin/brew \
-  && git -C .linuxbrew/DinrusBrew remote set-url origin https://github.com/DinrusBrew/brew \
-  && git -C .linuxbrew/DinrusBrew fetch origin \
-  && DINRUSBREW_NO_ANALYTICS=1 DINRUSBREW_NO_AUTO_UPDATE=1 brew tap --force homebrew/core \
-  && brew install-bundler-gems --groups=all \
-  && brew cleanup \
-  && { git -C .linuxbrew/DinrusBrew config --unset gc.auto; true; } \
-  && { git -C .linuxbrew/DinrusBrew config --unset homebrew.devcmdrun; true; } \
-  && touch .linuxbrew/.homebrewdocker
+  .drx/bin \
+  .drx/etc \
+  .drx/include \
+  .drx/lib \
+  .drx/opt \
+  .drx/sbin \
+  .drx/share \
+  .drx/var/dinrusbrew/linked \
+  .drx/Cellar \
+  && ln -s ../DinrusHub/bin/dhub .drx/bin/dhub \
+  && git -C .drx/DinrusHub remote set-url origin https://github.com/Homebrew/brew \
+  && git -C .drx/DinrusHub fetch origin \
+  && DRXHUB_NO_ANALYTICS=1 DRXHUB_NO_AUTO_UPDATE=1 dhub tap --force dinrusbrew/core \
+  && dhub install-bundler-gems --groups=all \
+  && dhub cleanup \
+  && { git -C .drx/DinrusHub config --unset gc.auto; true; } \
+  && { git -C .drx/DinrusHub config --unset homebrew.devcmdrun; true; } \
+  && touch .drx/.dinrusbrewdocker

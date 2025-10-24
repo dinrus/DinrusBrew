@@ -8,20 +8,20 @@
 !/Library
 
 # Ignore files within `Library` (again).
-/Library/DinrusBrew/.npmignore
-/Library/DinrusBrew/bin
-/Library/DinrusBrew/doc
-/Library/DinrusBrew/prof
-/Library/DinrusBrew/test/.gem
-/Library/DinrusBrew/test/.subversion
-/Library/DinrusBrew/test/coverage
-/Library/DinrusBrew/test/junit
-/Library/DinrusBrew/test/fs_leak_log
-/Library/DinrusBrew/vendor/portable-ruby
+/Library/DinrusHub/.npmignore
+/Library/DinrusHub/bin
+/Library/DinrusHub/doc
+/Library/DinrusHub/prof
+/Library/DinrusHub/test/.gem
+/Library/DinrusHub/test/.subversion
+/Library/DinrusHub/test/coverage
+/Library/DinrusHub/test/junit
+/Library/DinrusHub/test/fs_leak_log
+/Library/DinrusHub/vendor/portable-ruby
 /Library/Taps
 /Library/PinnedTaps
-/Library/DinrusBrew/.byebug_history
-/Library/DinrusBrew/test/.rdbg_history
+/Library/DinrusHub/.byebug_history
+/Library/DinrusHub/test/.rdbg_history
 
 # Ignore Bundler files
 **/.bundle/bin
@@ -152,8 +152,8 @@
 # Ignore `bin` contents (again).
 /bin
 
-# Unignore our `brew` script.
-!/bin/brew
+# Unignore our `dhub` script.
+!/bin/dhub
 
 # Unignore our configuration/completions/documentation.
 !/.devcontainer
@@ -190,7 +190,7 @@
 !/README.md
 
 # Unignore tests' bundle config
-!/Library/DinrusBrew/test/.bundle/config
+!/Library/DinrusHub/test/.bundle/config
 
 # Unignore editor configuration
 !/.sublime

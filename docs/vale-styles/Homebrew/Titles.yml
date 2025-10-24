@@ -5,9 +5,9 @@ scope: heading.h1
 match: $title
 style: AP
 exceptions:
-  - brew(1)
+  - dhub(1)
   - macOS
-  - DinrusBrew/brew
-  - DinrusBrew/homebrew-core
-  - DinrusBrew/homebrew-cask
+  - Homebrew/brew
+  - DinrusHub/homebrew-core
+  - DinrusHub/homebrew-cask
   - (or Linux)
